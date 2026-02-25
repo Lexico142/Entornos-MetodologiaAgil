@@ -97,6 +97,31 @@ public class Main {
         }
     }
 
+    static void ataqueNormal(Personaje atacante, Personaje defensor) {
+        int probabilidadAcierto = (int) (Math.random() * 100) + 1;
+
+        if (probabilidadAcierto <= 80) {
+            defensor.setVida(defensor.getVida() - atacante.getDanoCuerpoaCuerpo());
+            System.out.println(atacante.getNombre() + " acierta el golpe y quita " + atacante.getDanoCuerpoaCuerpo() + " de vida.");
+        } else {
+            System.out.println(atacante.getNombre() + " intento golpear a " + defensor.getNombre() + " pero fallo.");
+        }
+    }
+
+    static void ataqueMagico(Personaje atacante, Personaje defensor) {
+        int costeMana = 20;
+
+        if (costeMana > atacante.getCantMana()) {
+            System.out.println(atacante.getNombre() + " no tiene suficiente mana para el ataque magico.");
+            return;
+        }
+
+        atacante.setCantMana(atacante.getCantMana() - costeMana);
+        defensor.setVida(defensor.getVida() - atacante.getDanoMagia());
+
+        System.out.println(atacante.getNombre() + " lanza un hechizo y hace " + atacante.getDanoMagia() + " de daño magico.");
+    }
+
     static void curarse(Personaje jugador) {
         int costeCuracion = 50;
 
