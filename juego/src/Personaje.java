@@ -92,6 +92,6 @@ public class Personaje {
 
         setVida(nuevaVida);
 
-        System.out.println("");
+        System.out.println("Se ha curado: " + cantidadCurada);
     }
 }
