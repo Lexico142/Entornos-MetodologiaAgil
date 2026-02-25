@@ -1,6 +1,6 @@
 public class Personaje {
     private String nombre;
-    private int skillPoints = 100;
+    private int skillPoints;
     private int cantMana;
     private int danoCuerpoaCuerpo;
     private int danoMagia;
