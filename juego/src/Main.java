@@ -96,6 +96,28 @@ public class Main {
             personaje2.mostrarEstadisticasJug();
         }
     }
+
+    static void curarse(Personaje jugador) {
+        int costeCuracion = 50;
+
+        if (costeCuracion > jugador.getCantMana()) {
+            System.out.println(jugador.getNombre() + " no tiene suficiente mana para curarse.");
+            return;
+        }
+
+        int cantidadCurada = (int) (Math.random() * 21) + 40;
+
+        jugador.setCantMana(jugador.getCantMana() - costeCuracion);
+        int nuevaVida = jugador.getVida() + cantidadCurada;
+
+        if (nuevaVida > 200) {
+            nuevaVida = 200;
+        }
+
+        jugador.setVida(nuevaVida);
+
+        System.out.println(jugador.getNombre() + " se ha curado " + cantidadCurada + " puntos de vida.");
+    }
 }
 
 

@@ -72,26 +72,4 @@ public class Personaje {
         System.out.println("Ataque magico: " + this.getDanoMagia());
         System.out.println("=======================================================");
     }
-
-    public void curarse() {
-        int costeCuracion = 50;
-
-        if (costeCuracion > getCantMana()) {
-            System.out.println("No tienes suficiente maná para curarte");
-            return;
-        }
-
-        int cantidadCurada = (int) Math.floor(Math.random() * (60 - 40 + 1) + 40);
-
-        setCantMana(getCantMana() - costeCuracion);
-        int nuevaVida = getVida() + cantidadCurada;
-
-        if (nuevaVida > 200) {
-            nuevaVida = 200;
-        }
-
-        setVida(nuevaVida);
-
-        System.out.println("Se ha curado: " + cantidadCurada);
-    }
 }
