@@ -66,10 +66,32 @@ public class Personaje {
     public void mostrarEstadisticasJug() {
         System.out.println("=======================================================");
         System.out.println("Nombre: " + this.getNombre());
-        System.out.println("Vida: " + this.vida);
-        System.out.println("Cantidad mana: " + this.cantMana);
-        System.out.println("Daño cuerpo a cuerpo: " + this.danoCuerpoaCuerpo);
-        System.out.println("Ataque magico: " + this.danoMagia);
+        System.out.println("Vida: " + this.getVida());
+        System.out.println("Cantidad mana: " + this.getCantMana());
+        System.out.println("Daño cuerpo a cuerpo: " + this.getDanoCuerpoaCuerpo());
+        System.out.println("Ataque magico: " + this.getDanoMagia());
         System.out.println("=======================================================");
+    }
+
+    public void curarse() {
+        int costeCuracion = 50;
+
+        if (costeCuracion > getCantMana()) {
+            System.out.println("No tienes suficiente maná para curarte");
+            return;
+        }
+
+        int cantidadCurada = (int) Math.floor(Math.random() * (60 - 40 + 1) + 40);
+
+        setCantMana(getCantMana() - costeCuracion);
+        int nuevaVida = getVida() + cantidadCurada;
+
+        if (nuevaVida > 200) {
+            nuevaVida = 200;
+        }
+
+        setVida(nuevaVida);
+
+        System.out.println("");
     }
 }
