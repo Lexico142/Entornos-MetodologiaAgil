@@ -1,18 +1,19 @@
 import java.util.Scanner;
+
 public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static Personaje personaje1 = new Personaje("Jugador 1", 100, 100, 10, 15, 200);
     public static Personaje personaje2 = new Personaje("Jugador 2", 100, 100, 10, 15, 200);
-    static void main(String[] args) {
+
+    public static void main(String[] args) {
         crearPersonaje1();
         crearPersonaje2();
+        iniciarPelea();
     }
-
-
 
     static void crearPersonaje1() {
         personaje1.mostrarEstadisticasJug();
-        while (personaje1.getSkillPoints() >= 0) {
+        while (personaje1.getSkillPoints() > 0) {
             System.out.println("Reparte los puntos de habilidad entre los siguientes atributos: ");
             System.out.println("1. Cantidad de mana");
             System.out.println("2. Daño cuerpo a cuerpo");
@@ -52,17 +53,18 @@ public class Main {
             }
             personaje1.mostrarEstadisticasJug();
         }
-
     }
-    static void crearPersonaje2 () {
+
+    static void crearPersonaje2() {
         personaje2.mostrarEstadisticasJug();
-        while (personaje2.getSkillPoints() >= 0) {
+        while (personaje2.getSkillPoints() > 0) {
             System.out.println("Reparte los puntos de habilidad entre los siguientes atributos: ");
             System.out.println("1. Cantidad de mana");
             System.out.println("2. Daño cuerpo a cuerpo");
             System.out.println("3. Daño magia");
             System.out.println("4. Vida");
             System.out.println("Puntos de habilidad restantes: " + personaje2.getSkillPoints());
+
             int opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
@@ -143,7 +145,53 @@ public class Main {
 
         System.out.println(jugador.getNombre() + " se ha curado " + cantidadCurada + " puntos de vida.");
     }
+
+    static void iniciarPelea() {
+        System.out.println("\nLa pelea ha comenzado.");
+
+        boolean turnoJugador1 = true;
+
+        while (personaje1.getVida() > 0 && personaje2.getVida() > 0) {
+
+            Personaje atacante;
+            Personaje defensor;
+
+            if (turnoJugador1) {
+                atacante = personaje1;
+                defensor = personaje2;
+            } else {
+                atacante = personaje2;
+                defensor = personaje1;
+            }
+
+            System.out.println("\nTurno de: " + atacante.getNombre());
+            System.out.println("Vida de " + defensor.getNombre() + ": " + defensor.getVida());
+            System.out.println("Mana de " + atacante.getNombre() + ": " + atacante.getCantMana());
+            System.out.println("Vida de " + atacante.getNombre() + ": " + atacante.getVida());
+            System.out.println("1. Ataque Cuerpo a Cuerpo");
+            System.out.println("2. Ataque Magico");
+            System.out.println("3. Curarse");
+            System.out.print("Elige tu accion: ");
+
+            int accion = sc.nextInt();
+
+            if (accion == 1) {
+                ataqueNormal(atacante, defensor);
+            } else if (accion == 2) {
+                ataqueMagico(atacante, defensor);
+            } else if (accion == 3) {
+                curarse(atacante);
+            } else {
+                System.out.println("Opcion no valida. Pierdes tu turno.");
+            }
+
+            if (defensor.getVida() <= 0) {
+                System.out.println(defensor.getNombre() + " ha sido derrotado.");
+                System.out.println(atacante.getNombre() + " ha ganado.");
+                break;
+            }
+
+            turnoJugador1 = !turnoJugador1;
+        }
+    }
 }
-
-
-
